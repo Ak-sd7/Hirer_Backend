@@ -15,6 +15,25 @@ const aschema = new mongoose.Schema({
         select: false,
         required: true
     },
+    UniName:{
+        type: String,
+        required: true
+    },
+    UniPass:{
+        type: Number,
+        required: true
+    },
+    ProjectTitle:{
+        type: Array[String],
+        required:false
+    },
+    Skills:{
+        type: Array[String],
+        required: true
+    },
+    DOB:{
+        type: Date,
+    },
     CreatedAt:{
         type: Date,
         default: Date.now,
