@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const aschema = new mongoose.Schema({
     name:{
         type: String,
@@ -24,11 +25,11 @@ const aschema = new mongoose.Schema({
         required: true
     },
     ProjectTitle:{
-        type: Array[String],
+        type: String,
         required:false
     },
     Skills:{
-        type: Array[String],
+        type: String,
         required: true
     },
     DOB:{

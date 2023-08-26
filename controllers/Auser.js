@@ -1,4 +1,4 @@
-import Auser from "../models/Auser";
+import Auser from "../models/Auser.js";
 
 export const Login = (req, res)=>{}
 

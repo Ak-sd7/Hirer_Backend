@@ -1,4 +1,4 @@
-import Muser from "../models/Muser";
+import Muser from "../models/Muser.js";
 
 export const Login = (req, res)=>{}
 
