@@ -3,6 +3,8 @@ import auserRouter from "./routes/Auser.js"
 import muserRouter from "./routes/Muser.js"
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
+import { errorMiddleware } from "./middlewares/error.js";
+
 export const app = express();
 
 config({
@@ -19,3 +21,5 @@ app.use("/api/v1/musers", muserRouter);
 app.get("/", (req, res)=>{
     res.send("hello");
 })
+
+app.use(errorMiddleware);
