@@ -20,6 +20,10 @@ const aschema = new mongoose.Schema({
         type: String,
         required: true
     },
+    UniGpa:{
+        type: mongoose.Schema.Types.Decimal128,
+        required: true
+    },
     UniPass:{
         type: Number,
         required: true
@@ -29,7 +33,7 @@ const aschema = new mongoose.Schema({
         required:false
     },
     Skills:{
-        type: String,
+        type: [String],
         required: true
     },
     DOB:{

@@ -14,13 +14,13 @@ const mschema = new mongoose.Schema({
         type: String,
         select: false,
         required: true
-    },
+    },                   
     CompanyName:{
         type: String,
         required: true
     },
     RequiredSkills:{
-        type: String,
+        type: [String],
         required: true
     },
     PhoneNo:{
