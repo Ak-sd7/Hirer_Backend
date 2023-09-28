@@ -33,7 +33,7 @@ const aschema = new mongoose.Schema({
         required:false
     },
     Skills:{
-        type: [String],
+        type: String,
         required: true
     },
     DOB:{

@@ -20,7 +20,7 @@ const mschema = new mongoose.Schema({
         required: true
     },
     RequiredSkills:{
-        type: [String],
+        type: String,
         required: true
     },
     PhoneNo:{
