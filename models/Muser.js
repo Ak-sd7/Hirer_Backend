@@ -19,10 +19,6 @@ const mschema = new mongoose.Schema({
         type: String,
         required: true
     },
-    RequiredSkills:{
-        type: String,
-        required: true
-    },
     PhoneNo:{
         type: Number,
         required: true
