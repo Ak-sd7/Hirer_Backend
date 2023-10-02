@@ -29,7 +29,7 @@ export const Register = async(req, res, next)=>{
         if(user)
             return new ErrorHandler("User Already Exists", 404);
         const hashp = await bcrypt.hash(password, 10);
-        user = await Muser.create({ name, email, password, CompanyName, PhoneNo, Stipend, Duration, skills});
+        user = await Muser.create({ name, email, password:hashp, CompanyName, PhoneNo, Stipend, Duration, skills});
         sendCookie(user, res, "Registered Successfully", 201);
     } catch (error) {
         next(error)
