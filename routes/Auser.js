@@ -1,5 +1,6 @@
 import express from "express";
 import { GetDetail, Login, Logout, Register } from "../controllers/Auser.js";
+import { isAutha } from "../middlewares/auth.js";
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get("/logout", Logout)
 
 // router.get("/me", isAuthenticated, GetDetail)
 
-router.get("/me", GetDetail)
+router.get("/me", isAutha,GetDetail)
 
 
 export default router;
