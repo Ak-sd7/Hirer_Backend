@@ -23,16 +23,33 @@ export const Login = async(req, res, next)=>{
 }
 
 export const Register = async(req, res, next)=>{
-    const {} = req.body;
-    let user = await Muser.findOne({email});
-    if(user)
-        return new ErrorHandler("User Already Exists", 404);
-    const hashp = await bcrypt.hash(password, 10);
-    user = await Muser.create({});
-    sendCookie(user, res, "Registered Successfully", 201);
-    
+    try {
+        const {name, email, password, CompanyName, PhoneNo, Stipend, Duration, skills} = req.body;
+        let user = await Muser.findOne({email});
+        if(user)
+            return new ErrorHandler("User Already Exists", 404);
+        const hashp = await bcrypt.hash(password, 10);
+        user = await Muser.create({ name, email, password, CompanyName, PhoneNo, Stipend, Duration, skills});
+        sendCookie(user, res, "Registered Successfully", 201);
+    } catch (error) {
+        next(error)
+    }    
 }
 
-export const Logout = (req, res)=>{}
+export const Logout = (req, res)=>{
+    res.status(200)
+        .cookie("token", "", {
+        expires:new Date(Date.now()),
+        })
+    .json({
+        success:true,
+        user:req.user
+    })
+}
 
-export const GetDetail = (req, res)=>{}
+export const GetDetail = (req, res)=>{
+    res.status(200).json({
+        success:true,
+        user:req.user
+    })
+}

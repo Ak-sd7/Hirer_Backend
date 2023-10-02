@@ -12,7 +12,7 @@ router.get("/logout", Logout)
 
 // router.get("/me", isAuthenticated, GetDetail)
 
-router.get("/me", isAutha,GetDetail)
+router.get("/me", isAutha, GetDetail)
 
 
 export default router;
