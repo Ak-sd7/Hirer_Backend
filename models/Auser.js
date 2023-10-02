@@ -32,8 +32,9 @@ const aschema = new mongoose.Schema({
         type: String,
         required:false
     },
-    DOB:{
-        type: Date,
+    skills:{
+        type: [String],
+        required:false
     },
     CreatedAt:{
         type: Date,
