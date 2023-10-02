@@ -22,18 +22,18 @@ export const Login = async(req, res, next)=>{
     }
 }
 
-export const Register = async(req, res, next)=>{
+export const Register = async (req, res, next)=>{
     try {
         const {name, email, password, CompanyName, PhoneNo, Stipend, Duration, skills} = req.body;
         let user = await Muser.findOne({email});
         if(user)
-            return new ErrorHandler("User Already Exists", 404);
-        const hashp = await bcrypt.hash(password, 10);
-        user = await Muser.create({ name, email, password:hashp, CompanyName, PhoneNo, Stipend, Duration, skills});
-        sendCookie(user, res, "Registered Successfully", 201);
+            return next(new ErrorHandler("User already exist", 404));
+        const hashPass = await bcrypt.hash(password, 10);
+        user = await Muser.create({name, email, password:hashPass, CompanyName, PhoneNo, Stipend, Duration, skills});
+        sendCookie(user, res, "Registered Succesfully", 201);
     } catch (error) {
-        next(error)
-    }    
+        next(error);
+    }
 }
 
 export const Logout = (req, res)=>{
