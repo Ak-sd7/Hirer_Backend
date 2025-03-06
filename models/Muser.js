@@ -23,18 +23,6 @@ const mschema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    stipend:{
-        type: Number,
-        required: true
-    },
-    duration:{
-        type: Number,
-        required: true
-    },
-    skills:{
-        type: [String],
-        required:false
-    },
     createdAt:{
         type: Date,
         default: Date.now,
