@@ -16,19 +16,19 @@ const aschema = new mongoose.Schema({
         select: false,
         required: true
     },
-    UniName:{
+    uniName:{
         type: String,
         required: true
     },
-    UniGpa:{
+    uniGpa:{
         type: mongoose.Schema.Types.Decimal128,
         required: true
     },
-    UniPass:{
+    uniPass:{
         type: Number,
         required: true
     },
-    ProjectTitle:{
+    projectTitle:{
         type: String,
         required:false
     },
@@ -36,7 +36,7 @@ const aschema = new mongoose.Schema({
         type: [String],
         required:false
     },
-    CreatedAt:{
+    createdAt:{
         type: Date,
         default: Date.now,
         required: true

@@ -24,12 +24,12 @@ export const Login = async(req, res, next)=>{
 
 export const Register = async (req, res, next)=>{
     try {
-        const {name, email, password, UniName, UniGpa, UniPass, ProjectTitle, skills} = req.body;
+        const {name, email, password, uniName, uniGpa, uniPass, projectTitle, skills} = req.body;
         let user = await Auser.findOne({email});
         if(user)
             return next(new ErrorHandler("User already exist", 404));
         const hashPass = await bcrypt.hash(password, 10);
-        user = await Auser.create({name, email, password:hashPass, UniName, UniGpa, UniPass, ProjectTitle, skills});
+        user = await Auser.create({name, email, password:hashPass, uniName, uniGpa, uniPass, projectTitle, skills});
         sendCookie(user, res, "Registered Succesfully", 201);
     } catch (error) {
         next(error);
@@ -50,7 +50,7 @@ export const Logout = (req, res)=>{
 export const GetDetail = (req, res)=>{
     res.status(200).json({
         success:true,
-        user:req.user
+        userDetail:req.user
     })
 }
 

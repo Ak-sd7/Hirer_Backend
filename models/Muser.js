@@ -15,19 +15,19 @@ const mschema = new mongoose.Schema({
         select: false,
         required: true
     },                   
-    CompanyName:{
+    companyName:{
         type: String,
         required: true
     },
-    PhoneNo:{
+    phoneNo:{
         type: Number,
         required: true
     },
-    Stipend:{
+    stipend:{
         type: Number,
         required: true
     },
-    Duration:{
+    duration:{
         type: Number,
         required: true
     },
@@ -35,7 +35,7 @@ const mschema = new mongoose.Schema({
         type: [String],
         required:false
     },
-    CreatedAt:{
+    createdAt:{
         type: Date,
         default: Date.now,
         required: true
