@@ -77,3 +77,37 @@ export const JobPost = async (req, res, next) => {
       next(error);
     }
 };
+
+export const JobUpdate = async(req, res, next) => {
+    try {
+      const jobId = req.params._id;
+      console.log("id from param :", jobId);
+      const jobPost = await JobPosting.findById(jobId);
+
+      const { companyName, post, description, validity } = req.body;
+
+      if(!jobPost){
+        return next(new ErrorHandler("JobPost not found", 404));
+      }
+
+      if(req.user._id.toString() !== jobPost.person.toString())
+        return next(new ErrorHandler("Unauthorized user", 403));
+
+      const updatePost = await JobPosting.findByIdAndUpdate (
+        jobId, {
+          companyName: companyName || jobPost.companyName,
+          post: post || jobPost.post,
+          description: description || jobPost.description,
+          validity: validity || jobPost.validity,
+        },
+        {new: true}
+      )
+      res.status(200).json({
+        success: true,
+        message: "Job post updated successfully",
+        jobPost: updatePost
+      });
+    } catch (error) {
+        next(error);
+    }
+}
