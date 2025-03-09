@@ -28,13 +28,21 @@ const aschema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    projectTitle:{
+    linkedInUrl:{
+        type: String,
+        required:false
+    },
+    gitHubUrl:{
+        type: String,
+        required:false
+    },
+    resume:{
         type: String,
         required:false
     },
     skills:{
         type: [String],
-        required:false
+        required:true
     },
     createdAt:{
         type: Date,
