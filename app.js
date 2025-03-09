@@ -22,6 +22,7 @@ app.use(
         credentials: true,
     })
 );
+console.log(process.env.FRONTEND_URL);
 //Routes
 app.use("/api/v1/ausers", auserRouter);
 app.use("/api/v1/musers", muserRouter);
