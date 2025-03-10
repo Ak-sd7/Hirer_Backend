@@ -54,7 +54,7 @@ export const Logout = (req, res) => {
 export const GetDetail = (req, res) => {
   res.status(200).json({
     success: true,
-    userDetail: req.user,
+    user: req.user,
   });
 };
 

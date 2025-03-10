@@ -16,6 +16,10 @@ const aschema = new mongoose.Schema({
         select: false,
         required: true
     },
+    phoneNo:{
+        type: String,
+        required: true
+    },
     uniName:{
         type: String,
         required: true
@@ -29,10 +33,6 @@ const aschema = new mongoose.Schema({
         required: true
     },
     linkedInUrl:{
-        type: String,
-        required:false
-    },
-    gitHubUrl:{
         type: String,
         required:false
     },
