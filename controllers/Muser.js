@@ -60,17 +60,37 @@ export const GetDetail = (req, res) => {
 
 export const JobPost = async (req, res, next) => {
     try {
-      const { companyName, post, description, validity } = req.body;
+      const { 
+        title, 
+        company, 
+        location, 
+        employmentType, 
+        experience, 
+        salary, 
+        description, 
+        requirements, 
+        benefits, 
+        validity, 
+        person, 
+        createdAt 
+    } = req.body;
 
       const hirerId = req.user._id;
 
-      const jobPost = await JobPosting.create({
-        companyName,
-        post,
-        description,
-        validity,
-        person: hirerId,
-      });
+      const jobPost = await JobPosting.create({ 
+        title, 
+        company, 
+        location, 
+        employmentType, 
+        experience, 
+        salary, 
+        description, 
+        requirements, 
+        benefits, 
+        validity, 
+        person, 
+        createdAt 
+    });
 	  sendCookie(jobPost, res, "Post Created Successfully", 201);
     } 
     catch (error) {
@@ -84,7 +104,20 @@ export const JobUpdate = async(req, res, next) => {
       console.log("id from param :", jobId);
       const jobPost = await JobPosting.findById(jobId);
 
-      const { companyName, post, description, validity } = req.body;
+      const { 
+        title, 
+        company, 
+        location, 
+        employmentType, 
+        experience, 
+        salary, 
+        description, 
+        requirements, 
+        benefits, 
+        validity, 
+        person, 
+        createdAt 
+    } = req.body;
 
       if(!jobPost){
         return next(new ErrorHandler("JobPost not found", 404));
@@ -95,11 +128,19 @@ export const JobUpdate = async(req, res, next) => {
 
       const updatePost = await JobPosting.findByIdAndUpdate (
         jobId, {
-          companyName: companyName || jobPost.companyName,
-          post: post || jobPost.post,
+          title: title || jobPost.title,
+          company: company || jobPost.company,
+          location: location || jobPost.location,
+          employmentType: employmentType || jobPost.employmentType,
+          experience: experience || jobPost.experience,
+          salary: salary || jobPost.salary,
           description: description || jobPost.description,
+          requirements: requirements || jobPost.requirements,
+          benefits: benefits || jobPost.benefits,
           validity: validity || jobPost.validity,
-        },
+          person: person || jobPost.person,
+          createdAt: createdAt || jobPost.createdAt
+      },
         {new: true}
       )
       res.status(200).json({

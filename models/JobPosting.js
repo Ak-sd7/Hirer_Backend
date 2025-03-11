@@ -1,17 +1,41 @@
 import mongoose from "mongoose";
 
 const jobPosting = mongoose.Schema({
-    companyName:{
+    title:{
         type: String,
         required: true
     },
-    post:{
+    company:{
         type: String,
         required: true
+    },
+    location:{
+        type: String,
+        required: true
+    },
+    employmentType:{
+        type: String,
+        required: true
+    },
+    experience:{
+        type: Number,
+        required: true
+    },
+    salary:{
+        type: Number,
+        required
     },
     description: {
         type: String,
         required: true
+    },
+    requirements:{
+        type: String,
+        required: false
+    },
+    benefits:{
+        type: String,
+        required: false
     },
     validity: {
         type: Date,
