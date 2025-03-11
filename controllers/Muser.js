@@ -89,7 +89,11 @@ export const JobPost = async (req, res, next) => {
         validity, 
         person: hirerId
     });
-	  sendCookie(jobPost, res, "Post Created Successfully", 201);
+    res.status(200).json({
+      success: true,
+      message: "Post added successfully",
+      post: jobPost
+    });
     } 
     catch (error) {
       next(error);
