@@ -23,7 +23,7 @@ const jobPosting = mongoose.Schema({
     },
     salary:{
         type: Number,
-        required
+        required: true
     },
     description: {
         type: String,

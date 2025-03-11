@@ -152,3 +152,43 @@ export const JobUpdate = async(req, res, next) => {
         next(error);
     }
 }
+
+export const GetAllPosts = async(req, res)=>{
+  try {
+    const jobPosts = JobPosting.find({});
+    res.status(200).json({
+      success: true,
+      count: jobPosts.length,
+      posts: jobPosts
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export const GetPostsById = async(req, res, next) =>{
+  try {
+    const userId = req.params._id;
+  
+    const jobPostsById = await JobPosting.find({person: userId});
+  
+    if(jobPostsById.length===0) {
+      return res.status(200).json({
+        success: true,
+        message: "No job posts are found",
+        count: 0,
+        posts: []
+      })
+    }
+    
+    res.status(200).json({
+      success:true,
+      count: jobPostsById.length,
+      posts: jobPostsById
+    });
+  } catch (error) {
+    next(error);
+    
+  }
+
+}
