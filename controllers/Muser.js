@@ -70,9 +70,8 @@ export const JobPost = async (req, res, next) => {
         description, 
         requirements, 
         benefits, 
-        validity, 
-        person, 
-        createdAt 
+        validity,
+        person
     } = req.body;
 
       const hirerId = req.user._id;
@@ -88,8 +87,7 @@ export const JobPost = async (req, res, next) => {
         requirements, 
         benefits, 
         validity, 
-        person, 
-        createdAt 
+        person: hirerId
     });
 	  sendCookie(jobPost, res, "Post Created Successfully", 201);
     } 
@@ -102,7 +100,12 @@ export const JobUpdate = async(req, res, next) => {
     try {
       const jobId = req.params._id;
       console.log("id from param :", jobId);
+
       const jobPost = await JobPosting.findById(jobId);
+
+      if (!jobPost) {
+        return next(new ErrorHandler("Job post not found", 404));
+      }
 
       const { 
         title, 
@@ -114,9 +117,7 @@ export const JobUpdate = async(req, res, next) => {
         description, 
         requirements, 
         benefits, 
-        validity, 
-        person, 
-        createdAt 
+        validity,
     } = req.body;
 
       if(!jobPost){
@@ -138,8 +139,6 @@ export const JobUpdate = async(req, res, next) => {
           requirements: requirements || jobPost.requirements,
           benefits: benefits || jobPost.benefits,
           validity: validity || jobPost.validity,
-          person: person || jobPost.person,
-          createdAt: createdAt || jobPost.createdAt
       },
         {new: true}
       )
@@ -153,9 +152,9 @@ export const JobUpdate = async(req, res, next) => {
     }
 }
 
-export const GetAllPosts = async(req, res)=>{
+export const GetAllPosts = async(req, res, next)=>{
   try {
-    const jobPosts = JobPosting.find({});
+    const jobPosts = await JobPosting.find({});
     res.status(200).json({
       success: true,
       count: jobPosts.length,
@@ -188,7 +187,5 @@ export const GetPostsById = async(req, res, next) =>{
     });
   } catch (error) {
     next(error);
-    
   }
-
 }
