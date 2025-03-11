@@ -100,12 +100,8 @@ export const JobUpdate = async(req, res, next) => {
     try {
       const jobId = req.params._id;
       console.log("id from param :", jobId);
-
+      console.log("req.user:", req.user); 
       const jobPost = await JobPosting.findById(jobId);
-
-      if (!jobPost) {
-        return next(new ErrorHandler("Job post not found", 404));
-      }
 
       const { 
         title, 
@@ -118,6 +114,7 @@ export const JobUpdate = async(req, res, next) => {
         requirements, 
         benefits, 
         validity,
+        person
     } = req.body;
 
       if(!jobPost){
@@ -139,6 +136,7 @@ export const JobUpdate = async(req, res, next) => {
           requirements: requirements || jobPost.requirements,
           benefits: benefits || jobPost.benefits,
           validity: validity || jobPost.validity,
+          person: person || jobPost.person
       },
         {new: true}
       )

@@ -16,18 +16,25 @@ export const isAutha = async(req, res, next)=>{
     req.user = await Auser.findById(decodedId._id);
     next();
 }
-export const isAuthm = async(req, res, next)=>{
-    const {token} = req.cookies;
+export const isAuthm = async(req, res, next) => {
+    try {
+        const {token} = req.cookies;
 
-    if(!token){
-        return res.status(404).json({
-            success : false,
-            message : "Login First"
-        })
+        if(!token) {
+            return res.status(404).json({
+                success: false,
+                message: "Login First"
+            });
+        }
+
+        const decodedId = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = await Muser.findById(decodedId._id);
+        next();
+    } catch (error) {
+        return res.status(401).json({
+            success: false,
+            message: "Invalid or expired token. Please login again."
+        });
     }
-
-    const decodedId = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await Muser.findById(decodedId._id);
-    next();
-}
+};
 
