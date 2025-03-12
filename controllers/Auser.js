@@ -29,7 +29,7 @@ export const Register = async (req, res, next)=>{
         if(user)
             return next(new ErrorHandler("User already exist", 404));
         const hashPass = await bcrypt.hash(password, 10);
-        user = await Auser.create({name, email, password, phoneNo, uniName, uniGpa, uniPass, linkedInUrl, resume, skills});
+        user = await Auser.create({name, email, password: hashPass, phoneNo, uniName, uniGpa, uniPass, linkedInUrl, resume, skills});
         sendCookie(user, res, "Registered Succesfully", 201);
     } catch (error) {
         next(error);
