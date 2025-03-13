@@ -1,13 +1,14 @@
 import express  from 'express';
 import { AddApplicant, GetAllApplicantsByJobId, InitializePost } from '../controllers/Application';
+import { isAutha, isAuthm } from '../middlewares/auth';
 
 const router = express.Router();
 
-router.post("/create", InitializePost);
+router.post("/create/:_id", isAuthm, InitializePost);
 
-router.post("/addApplicant", AddApplicant);
+router.post("/addApplicant/:_id", isAutha, AddApplicant);
 
-router.get("/allApplicantsByJobId", GetAllApplicantsByJobId);
+router.get("/allApplicantsByJobId", isAuthm, GetAllApplicantsByJobId);
 
  
 
