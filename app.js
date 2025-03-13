@@ -1,6 +1,7 @@
 import express from "express";
 import auserRouter from "./routes/Auser.js"
 import muserRouter from "./routes/Muser.js"
+import applicationRouter from "./routes/Application.js"
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
@@ -26,6 +27,8 @@ console.log(process.env.FRONTEND_URL);
 //Routes
 app.use("/api/v1/ausers", auserRouter);
 app.use("/api/v1/musers", muserRouter);
+app.use("/api/v1/application", applicationRouter);
+
 
 app.get("/", (req, res)=>{
     res.send("hello");
