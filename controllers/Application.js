@@ -17,7 +17,7 @@ export const InitializePost = async(req, res, next) => {
         if(exist.person.toString() !== hirer.toString())
             return next(new ErrorHandler("You are not authorized to access this route", 401));
     
-        const applicationExist = await JobApplication.findOne({JobId: jobId});
+        const applicationExist = await JobApplication.findOne({jobId});
         if(applicationExist)
             return next(new ErrorHandler("Application already exist", 400));
     
@@ -48,7 +48,7 @@ export const AddApplicant = async(req, res, next) => {
         if(jobId.validity < Date.now())
             return next(new ErrorHandler("Job has expired", 400)); 
         
-        const applicationExist = await JobApplication.findOne({JobId: jobId});
+        const applicationExist = await JobApplication.findOne({jobId});
         if(!applicationExist) {
             await JobApplication.create({
                 jobId,
@@ -78,5 +78,25 @@ export const AddApplicant = async(req, res, next) => {
 }
 
 export const GetAllApplicantsByJobId = async(req, res, next) => {
+    try {
+        const jobId = req.params._id;
+        const application = await JobApplication.findOne({jobId});
+        if(!application)
+            return next(new ErrorHandler("Application does not exist", 404));
 
+        const job = await JobPosting.findById(jobId);
+        if(!job)
+            return next(new ErrorHandler("Job does not exist", 404));
+
+        if(job.person.toString() !== req.user._id.toString())
+            return next(new ErrorHandler("You are not authorized to access this route", 401));
+        
+        application.populate("applicantIds", "name email phoneNo uniName uniGpa skills resume linkedInUrl");
+        res.status(200).json({
+            success: true,
+            data: application
+        });
+    } catch (error) {
+        next(error);
+    }
 }

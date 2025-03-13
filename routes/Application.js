@@ -8,7 +8,7 @@ router.post("/create/:_id", isAuthm, InitializePost);
 
 router.post("/addApplicant/:_id", isAutha, AddApplicant);
 
-router.get("/allApplicantsByJobId", isAuthm, GetAllApplicantsByJobId);
+router.get("/allApplicantsByJobId/:_id", isAuthm, GetAllApplicantsByJobId);
 
  
 
