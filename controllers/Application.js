@@ -100,3 +100,16 @@ export const GetAllApplicantsByJobId = async(req, res, next) => {
         next(error);
     }
 }
+
+export const GetAllApplicationsByUser = async(req, res, next) => {
+    try {
+        const applications = await JobApplication.find({applicantIds: req.user._id}).populate("jobId", "title company location employmentType experience salary description requirements benefits validity");
+        res.status(200).json({
+            success: true,
+            count: applications.length,
+            data: applications
+        });    
+    } catch (error) {
+        next(error);
+    }
+}

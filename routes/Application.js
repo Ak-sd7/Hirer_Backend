@@ -1,5 +1,5 @@
 import express  from 'express';
-import { AddApplicant, GetAllApplicantsByJobId, InitializePost } from '../controllers/Application';
+import { AddApplicant, GetAllApplicantsByJobId, InitializePost, GetAllApplicationsByUser } from '../controllers/Application';
 import { isAutha, isAuthm } from '../middlewares/auth';
 
 const router = express.Router();
@@ -10,6 +10,7 @@ router.post("/addApplicant/:_id", isAutha, AddApplicant);
 
 router.get("/allApplicantsByJobId/:_id", isAuthm, GetAllApplicantsByJobId);
 
+router.get("/allApplicationsByUser", isAutha, GetAllApplicationsByUser);
  
 
 export default router;
