@@ -1,7 +1,4 @@
-import { sendCookie } from "../utils/features.js";
 import ErrorHandler from "../middlewares/error.js";
-import Auser from "../models/Auser.js";
-import Muser from "../models/Muser.js";
 import JobPosting from "../models/JobPosting.js";
 import JobApplication from "../models/Applications.js";
 
@@ -113,3 +110,5 @@ export const GetAllApplicationsByUser = async(req, res, next) => {
         next(error);
     }
 }
+
+

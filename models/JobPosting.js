@@ -40,7 +40,7 @@ const jobPosting = mongoose.Schema({
     validity: {
         type: Date,
         required: true,
-        expires:0 // automatic deletion of jobPost as the validity date is reached.
+        // expires:0 // automatic deletion of jobPost as the validity date is reached.
     },
     person: {
         type: mongoose.Schema.Types.ObjectId,
