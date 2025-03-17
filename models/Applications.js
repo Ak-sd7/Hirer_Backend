@@ -18,7 +18,7 @@ const applicantschema = new mongoose.Schema({
     staus:{
         type: String,
         enum: ["open", "reviewing", "closed"],
-        required: true
+        required: false
     },
     createdAt: {
         type: Date,

@@ -1,6 +1,6 @@
 import express  from 'express';
-import { AddApplicant, GetAllApplicantsByJobId, InitializePost, GetAllApplicationsByUser } from '../controllers/Application';
-import { isAutha, isAuthm } from '../middlewares/auth';
+import { AddApplicant, GetAllApplicantsByJobId, InitializePost, GetAllApplicationsByUser } from '../controllers/Application.js';
+import { isAutha, isAuthm } from '../middlewares/auth.js';
 
 const router = express.Router();
 

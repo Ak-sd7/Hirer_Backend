@@ -6,7 +6,7 @@ import JobApplication from "../models/Applications.js";
 export const InitializePost = async(req, res, next) => {
     try {
         const jobId = req.params._id;
-        const exist = await JobPosting.findById({jobId});
+        const exist = await JobPosting.findById(jobId);
         if(!exist)
             return next(new ErrorHandler("Job does not exist", 404));
     
@@ -38,7 +38,7 @@ export const AddApplicant = async(req, res, next) => {
     try {
         const candidate = req.user._id, jobId = req.params._id;
         
-        const exist = await JobPosting.findById({jobId});
+        const exist = await JobPosting.findById(jobId);
         if(!exist)
             return next(new ErrorHandler("Job does not exist", 404));
 
@@ -63,7 +63,7 @@ export const AddApplicant = async(req, res, next) => {
             res.status(201).json({
                 success: true,
                 message: "Application submitted successfully",
-                data: applicationExist
+                data: applicationExist.applicantIds
             })
         }else{
             return next(new ErrorHandler("You have already applied for this job", 400));
@@ -88,10 +88,10 @@ export const GetAllApplicantsByJobId = async(req, res, next) => {
         if(job.person.toString() !== req.user._id.toString())
             return next(new ErrorHandler("You are not authorized to access this route", 401));
         
-        application.populate("applicantIds", "name email phoneNo uniName uniGpa skills resume linkedInUrl");
+        await application.populate("applicantIds", "name email phoneNo uniName uniGpa skills resume linkedInUrl");
         res.status(200).json({
             success: true,
-            data: application
+            data: application.applicantIds
         });
     } catch (error) {
         next(error);
